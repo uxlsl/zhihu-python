@@ -696,6 +696,31 @@ class User:
             return
             yield
 
+    def get_location(self):
+        if self.user_url == None:
+            print "I'm anonymous user."
+            return ""
+        else:
+            if self.soup == None:
+                self.parser()
+            soup = self.soup
+            try:
+                return soup.find('span', class_='location item').get('title', '')
+            except AttributeError:
+                return ""
+
+    def get_education(self):
+        if self.user_url == None:
+            print "I'm anonymous user."
+            return ""
+        else:
+            if self.soup == None:
+                self.parser()
+            soup = self.soup
+            try:
+                return soup.find('span', class_='education item').get('title', '')
+            except AttributeError:
+                return ""
 
 
 class Answer:
